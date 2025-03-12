@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:3306/cricketdb?createDatabaseIfNotExists=true
+    username: root
+    password: dorc
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MSQLDialect
+    hibernate:
+      ddl-auto: update
+  application:
+    name: cricket-app
+
+
+
+
