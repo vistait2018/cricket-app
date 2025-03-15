@@ -14,4 +14,6 @@ public interface PlayerService {
     PlayerResponse getPlayerById(Integer id);
 
     String deletePlayer(Integer playerId);
+
+    List<PlayerResponse> searchForPlayerWithRole(String role);
 }

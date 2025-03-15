@@ -7,6 +7,7 @@ import com.pks.cricket_app.entity.Player;
 import com.pks.cricket_app.exception.CricketAppCustomException;
 import com.pks.cricket_app.repository.PlayerRepository;
 
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,13 +22,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-
+@Log4j2
 public class PlayerServiceImpl implements PlayerService {
 
     @Autowired
     private PlayerRepository playerRepository;
 
-    private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 
     @Override
     public PlayerResponse addPlayer(PlayerRequest playerRequest) {
@@ -82,6 +82,22 @@ public class PlayerServiceImpl implements PlayerService {
         playerRepository.deleteById(player.getPlayerId());
 
         return String.format("player with the id %s is deleted successfully",playerId);
+    }
+
+    @Override
+    public List<PlayerResponse> searchForPlayerWithRole(String role) {
+
+        List<Player> allPlayers = playerRepository.findAllByRole(role);
+
+        final List<PlayerResponse> playerResponses =
+                allPlayers.stream()
+                        .map(player -> {
+                            PlayerResponse response
+                                    = new PlayerResponse();
+                            BeanUtils.copyProperties(player, response);
+                            return response;
+                        }).collect(Collectors.toList());
+        return playerResponses;
     }
 
 

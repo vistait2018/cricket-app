@@ -58,4 +58,13 @@ public class PlayerController {
                 = playerService.deletePlayer(playerId);
         return new ResponseEntity<>(message , HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PlayerResponse>> searchPlayer(
+            @RequestParam("role") String role
+    ){
+        List<PlayerResponse> players = playerService
+                .searchForPlayerWithRole(role);
+        return new ResponseEntity<>(players, HttpStatus.OK);
+    }
 }
