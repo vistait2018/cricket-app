@@ -4,6 +4,7 @@ import com.pks.cricket_app.controller.PlayerController;
 import com.pks.cricket_app.dtos.PlayerRequest;
 import com.pks.cricket_app.dtos.PlayerResponse;
 import com.pks.cricket_app.entity.Player;
+import com.pks.cricket_app.exception.CricketAppCustomException;
 import com.pks.cricket_app.repository.PlayerRepository;
 
 import org.slf4j.Logger;
@@ -65,8 +66,8 @@ public class PlayerServiceImpl implements PlayerService {
 
             Player player=  playerRepository.findById(id)
                         .orElseThrow(
-                                ()->new RuntimeException("Player with Id "+id
-                                        +" not found"));
+                                ()->new CricketAppCustomException("Player with Id "+id
+                                        +" not found","PLAYER_NOT_FOUND"));
                 BeanUtils.copyProperties(player,playerResponse);
 
         return playerResponse;
