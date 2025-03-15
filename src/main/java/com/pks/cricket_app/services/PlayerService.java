@@ -12,4 +12,6 @@ public interface PlayerService {
     List<PlayerResponse> getAllPlayers();
 
     PlayerResponse getPlayerById(Integer id);
+
+    String deletePlayer(Integer playerId);
 }

@@ -73,5 +73,16 @@ public class PlayerServiceImpl implements PlayerService {
         return playerResponse;
     }
 
+    @Override
+    public String deletePlayer(Integer playerId) {
+        Player player=  playerRepository.findById(playerId)
+                .orElseThrow(
+                        ()->new CricketAppCustomException("Player with Id "+playerId
+                                +" not found","PLAYER_NOT_FOUND"));
+        playerRepository.deleteById(player.getPlayerId());
+
+        return String.format("player with the id %s is deleted successfully",playerId);
+    }
+
 
 }

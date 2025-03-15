@@ -50,4 +50,12 @@ public class PlayerController {
 
         return new ResponseEntity<>(playerResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String>
+    deletePlayer(@PathVariable("id") Integer playerId){
+       String message
+                = playerService.deletePlayer(playerId);
+        return new ResponseEntity<>(message , HttpStatus.OK);
+    }
 }
