@@ -15,6 +15,12 @@ spring:
   application:
     name: cricket-app
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env"
 
 
 
